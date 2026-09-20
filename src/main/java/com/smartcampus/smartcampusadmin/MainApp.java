@@ -15,7 +15,7 @@ public class MainApp extends Application {
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
         primaryStage.setTitle("Smart Campus Admin");
-        primaryStage.setMaximized(true);
+
         switchScene("login.fxml");
         primaryStage.show();
     }
