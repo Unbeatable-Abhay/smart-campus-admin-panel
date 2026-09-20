@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.smartcampus.smartcampusadmin.controller.UtilizationController">
+
+    <top>
+        <HBox spacing="10.0" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="10.0" right="10.0" bottom="10.0" left="10.0" />
+            </padding>
+
+            <Label text="Utilization Dashboard" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <Button text="Bookings" onAction="#handleGoToBookings" />
+            <Button text="Resources" onAction="#handleGoToResources" />
+            <Button text="Logout" onAction="#handleLogout" />
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="15.0">
+            <padding>
+                <Insets top="10.0" right="10.0" bottom="10.0" left="10.0" />
+            </padding>
+
+            <Label text="Most Booked Resources" style="-fx-font-weight: bold;" />
+            <BarChart fx:id="resourceChart" prefHeight="250.0">
+                <xAxis>
+                    <CategoryAxis label="Resource ID" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Booking Count" />
+                </yAxis>
+            </BarChart>
+
+            <Label text="Resource Clusters" style="-fx-font-weight: bold;" />
+            <ListView fx:id="clustersListView" prefHeight="150.0" />
+
+        </VBox>
+    </center>
+
+</BorderPane>
