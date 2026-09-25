@@ -1,6 +1,5 @@
 package com.smartcampus.smartcampusadmin.controller;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -14,8 +13,10 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.VBox;
 
 public class UtilizationController {
 
@@ -35,7 +36,17 @@ public class UtilizationController {
     private Label peakHourValue;
 
     @FXML
+    private VBox sidebarPanel;
+
+    @FXML
+    private Button avatarButton;
+
+    @FXML
     public void initialize() {
+        String userName = SessionManager.getUserName();
+        String initial = (userName != null && !userName.isEmpty()) ? userName.substring(0, 1).toUpperCase() : "A";
+        avatarButton.setText(initial);
+
         loadUtilization();
         loadClusters();
     }
@@ -141,6 +152,13 @@ public class UtilizationController {
     private void handleLogout() {
         SessionManager.clear();
         switchScene("login.fxml");
+    }
+
+    @FXML
+    private void handleToggleSidebar() {
+        boolean isCurrentlyOpen = sidebarPanel.isVisible();
+        sidebarPanel.setVisible(!isCurrentlyOpen);
+        sidebarPanel.setManaged(!isCurrentlyOpen);
     }
 
     private void switchScene(String fxmlFile) {

@@ -10,75 +10,82 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.smartcampus.smartcampusadmin.controller.UtilizationController"
-            styleClass="dashboard-plain-background">
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.smartcampus.smartcampusadmin.controller.UtilizationController"
+           styleClass="dashboard-plain-background">
 
-    <left>
-        <VBox styleClass="sidebar">
-            <Label text="Smart Campus" styleClass="sidebar-title" />
-
-            <Button text="Bookings" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleGoToBookings" />
-            <Button text="Resources" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleGoToResources" />
-            <Button text="Utilization" styleClass="sidebar-button-active" maxWidth="Infinity" onAction="#handleGoToUtilization" />
-
-            <Region VBox.vgrow="ALWAYS" />
-
-            <Button text="Logout" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleLogout" />
-        </VBox>
-    </left>
-
-    <top>
-        <HBox alignment="CENTER_LEFT">
-            <padding>
-                <Insets top="20.0" right="24.0" bottom="10.0" left="24.0" />
-            </padding>
-            <Label text="Utilization Dashboard" styleClass="dashboard-heading" />
-        </HBox>
-    </top>
-
-    <center>
-        <VBox spacing="15.0">
-            <BorderPane.margin>
-                <Insets top="0.0" right="24.0" bottom="24.0" left="24.0" />
-            </BorderPane.margin>
-
-            <HBox spacing="15.0">
-                <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" alignment="CENTER">
-                    <Label fx:id="totalBookingsValue" text="-" styleClass="stat-value" />
-                    <Label text="Total Bookings" styleClass="stat-label" />
-                </VBox>
-                <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" alignment="CENTER">
-                    <Label fx:id="topResourceValue" text="-" styleClass="stat-value" />
-                    <Label text="Most Booked Resource" styleClass="stat-label" />
-                </VBox>
-                <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" alignment="CENTER">
-                    <Label fx:id="peakHourValue" text="-" styleClass="stat-value" />
-                    <Label text="Peak Hour" styleClass="stat-label" />
-                </VBox>
+    <BorderPane>
+        <top>
+            <HBox alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="20.0" right="24.0" bottom="10.0" left="24.0" />
+                </padding>
+                <Label text="Utilization Dashboard" styleClass="dashboard-heading" />
             </HBox>
+        </top>
 
-            <VBox styleClass="dashboard-panel" spacing="10.0">
-                <Label text="Most Booked Resources" styleClass="dashboard-heading" style="-fx-font-size: 15px;" />
-                <BarChart fx:id="resourceChart" prefHeight="240.0">
-                    <xAxis>
-                        <CategoryAxis label="Resource ID" />
-                    </xAxis>
-                    <yAxis>
-                        <NumberAxis label="Booking Count" />
-                    </yAxis>
-                </BarChart>
+        <center>
+            <VBox spacing="15.0">
+                <BorderPane.margin>
+                    <Insets top="0.0" right="24.0" bottom="24.0" left="24.0" />
+                </BorderPane.margin>
+
+                <HBox spacing="15.0">
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" alignment="CENTER">
+                        <Label fx:id="totalBookingsValue" text="-" styleClass="stat-value" />
+                        <Label text="Total Bookings" styleClass="stat-label" />
+                    </VBox>
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" alignment="CENTER">
+                        <Label fx:id="topResourceValue" text="-" styleClass="stat-value" />
+                        <Label text="Most Booked Resource" styleClass="stat-label" />
+                    </VBox>
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" alignment="CENTER">
+                        <Label fx:id="peakHourValue" text="-" styleClass="stat-value" />
+                        <Label text="Peak Hour" styleClass="stat-label" />
+                    </VBox>
+                </HBox>
+
+                <VBox styleClass="dashboard-panel" spacing="10.0">
+                    <Label text="Most Booked Resources" styleClass="dashboard-heading" style="-fx-font-size: 15px;" />
+                    <BarChart fx:id="resourceChart" prefHeight="240.0">
+                        <xAxis>
+                            <CategoryAxis label="Resource ID" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Booking Count" />
+                        </yAxis>
+                    </BarChart>
+                </VBox>
+
+                <VBox styleClass="dashboard-panel" spacing="10.0" VBox.vgrow="ALWAYS">
+                    <Label text="Resource Clusters" styleClass="dashboard-heading" style="-fx-font-size: 15px;" />
+                    <ListView fx:id="clustersListView" VBox.vgrow="ALWAYS" />
+                </VBox>
             </VBox>
+        </center>
+    </BorderPane>
 
-            <VBox styleClass="dashboard-panel" spacing="10.0" VBox.vgrow="ALWAYS">
-                <Label text="Resource Clusters" styleClass="dashboard-heading" style="-fx-font-size: 15px;" />
-                <ListView fx:id="clustersListView" VBox.vgrow="ALWAYS" />
-            </VBox>
+    <VBox fx:id="sidebarPanel" styleClass="sidebar-overlay" visible="false" managed="false"
+          prefWidth="220.0" maxWidth="220.0"
+          StackPane.alignment="CENTER_LEFT">
+        <Button text="Bookings" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleGoToBookings" />
+        <Button text="Resources" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleGoToResources" />
+        <Button text="Utilization" styleClass="sidebar-button-active" maxWidth="Infinity" onAction="#handleGoToUtilization" />
 
-        </VBox>
-    </center>
+        <Region VBox.vgrow="ALWAYS" />
 
-</BorderPane>
+        <Button text="Logout" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleLogout" />
+    </VBox>
+
+    <Button fx:id="avatarButton" styleClass="avatar-button" onAction="#handleToggleSidebar"
+            StackPane.alignment="BOTTOM_LEFT">
+        <StackPane.margin>
+            <Insets bottom="16.0" left="16.0" />
+        </StackPane.margin>
+    </Button>
+
+</StackPane>

@@ -12,11 +12,13 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -62,6 +64,12 @@ public class ResourcesController {
     @FXML
     private Label errorLabel;
 
+    @FXML
+    private VBox sidebarPanel;
+
+    @FXML
+    private Button avatarButton;
+
     private Gson gson = new Gson();
 
     @FXML
@@ -82,6 +90,10 @@ public class ResourcesController {
                 locationField.setText(newSelection.getLocation());
             }
         });
+
+        String userName = SessionManager.getUserName();
+        String initial = (userName != null && !userName.isEmpty()) ? userName.substring(0, 1).toUpperCase() : "A";
+        avatarButton.setText(initial);
 
         loadResources();
     }
@@ -229,6 +241,13 @@ public class ResourcesController {
     private void handleLogout() {
         SessionManager.clear();
         switchScene("login.fxml");
+    }
+
+    @FXML
+    private void handleToggleSidebar() {
+        boolean isCurrentlyOpen = sidebarPanel.isVisible();
+        sidebarPanel.setVisible(!isCurrentlyOpen);
+        sidebarPanel.setManaged(!isCurrentlyOpen);
     }
 
     private void switchScene(String fxmlFile) {

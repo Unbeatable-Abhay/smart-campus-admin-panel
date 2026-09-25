@@ -7,7 +7,10 @@ import com.smartcampus.smartcampusadmin.api.ApiClient;
 import com.smartcampus.smartcampusadmin.api.ApiResponse;
 import com.smartcampus.smartcampusadmin.model.Booking;
 import com.smartcampus.smartcampusadmin.session.SessionManager;
+import com.smartcampus.smartcampusadmin.session.SessionManager;
 
+import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -49,6 +52,19 @@ public class BookingsController {
     @FXML
     private ComboBox<String> statusFilterBox;
 
+    @FXML
+    private VBox sidebarPanel;
+
+    @FXML
+    private Button avatarButton;
+
+    @FXML
+    private void handleToggleSidebar() {
+        boolean isCurrentlyOpen = sidebarPanel.isVisible();
+        sidebarPanel.setVisible(!isCurrentlyOpen);
+        sidebarPanel.setManaged(!isCurrentlyOpen);
+    }
+
     private Gson gson = new Gson();
     private ObservableList<Booking> allBookings = FXCollections.observableArrayList();
     private Timeline pollingTimeline;
@@ -65,6 +81,10 @@ public class BookingsController {
         statusFilterBox.getItems().addAll("All", "pending", "approved", "rejected", "cancelled");
         statusFilterBox.setValue("All");
         statusFilterBox.setOnAction(event -> applyFilter());
+
+        String userName = SessionManager.getUserName();
+        String initial = (userName != null && !userName.isEmpty()) ? userName.substring(0, 1).toUpperCase() : "A";
+        avatarButton.setText(initial);
 
         loadBookings();
         startPolling();

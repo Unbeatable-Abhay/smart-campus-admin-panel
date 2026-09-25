@@ -9,62 +9,70 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.smartcampus.smartcampusadmin.controller.BookingsController"
-            styleClass="dashboard-plain-background">
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.smartcampus.smartcampusadmin.controller.BookingsController"
+           styleClass="dashboard-plain-background">
 
-    <left>
-        <VBox styleClass="sidebar">
-            <Label text="Smart Campus" styleClass="sidebar-title" />
-
-            <Button text="Bookings" styleClass="sidebar-button-active" maxWidth="Infinity" onAction="#handleGoToBookings" />
-            <Button text="Resources" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleGoToResources" />
-            <Button text="Utilization" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleGoToUtilization" />
-
-            <Region VBox.vgrow="ALWAYS" />
-
-            <Button text="Logout" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleLogout" />
-        </VBox>
-    </left>
-
-    <top>
-        <HBox alignment="CENTER_LEFT">
-            <padding>
-                <Insets top="20.0" right="24.0" bottom="10.0" left="24.0" />
-            </padding>
-            <Label text="Bookings" styleClass="dashboard-heading" />
-        </HBox>
-    </top>
-
-    <center>
-        <VBox styleClass="dashboard-panel">
-            <BorderPane.margin>
-                <Insets top="0.0" right="24.0" bottom="24.0" left="24.0" />
-            </BorderPane.margin>
-            <TableView fx:id="bookingsTable">
-                <columns>
-                    <TableColumn fx:id="idColumn" text="ID" prefWidth="50.0" />
-                    <TableColumn fx:id="resourceIdColumn" text="Resource ID" prefWidth="90.0" />
-                    <TableColumn fx:id="userIdColumn" text="User ID" prefWidth="70.0" />
-                    <TableColumn fx:id="startTimeColumn" text="Start" prefWidth="150.0" />
-                    <TableColumn fx:id="endTimeColumn" text="End" prefWidth="150.0" />
-                    <TableColumn fx:id="statusColumn" text="Status" prefWidth="100.0" />
-                </columns>
-            </TableView>
-
-            <HBox spacing="10.0" alignment="CENTER_LEFT" style="-fx-padding: 12px 0px 0px 0px;">
-                <Label text="Filter by status:" />
-                <ComboBox fx:id="statusFilterBox" />
-
-                <Region HBox.hgrow="ALWAYS" />
-
-                <Button text="Approve selected" onAction="#handleApprove" />
-                <Button text="Reject selected" styleClass="secondary-button" onAction="#handleReject" />
+    <BorderPane>
+        <top>
+            <HBox alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="20.0" right="24.0" bottom="10.0" left="24.0" />
+                </padding>
+                <Label text="Bookings" styleClass="dashboard-heading" />
             </HBox>
-        </VBox>
-    </center>
+        </top>
 
-</BorderPane>
+        <center>
+            <VBox styleClass="dashboard-panel">
+                <BorderPane.margin>
+                    <Insets top="0.0" right="24.0" bottom="24.0" left="24.0" />
+                </BorderPane.margin>
+                <TableView fx:id="bookingsTable">
+                    <columns>
+                        <TableColumn fx:id="idColumn" text="ID" prefWidth="50.0" />
+                        <TableColumn fx:id="resourceIdColumn" text="Resource ID" prefWidth="90.0" />
+                        <TableColumn fx:id="userIdColumn" text="User ID" prefWidth="70.0" />
+                        <TableColumn fx:id="startTimeColumn" text="Start" prefWidth="150.0" />
+                        <TableColumn fx:id="endTimeColumn" text="End" prefWidth="150.0" />
+                        <TableColumn fx:id="statusColumn" text="Status" prefWidth="100.0" />
+                    </columns>
+                </TableView>
+
+                <HBox spacing="10.0" alignment="CENTER_LEFT" style="-fx-padding: 12px 0px 0px 0px;">
+                    <Label text="Filter by status:" />
+                    <ComboBox fx:id="statusFilterBox" />
+
+                    <Region HBox.hgrow="ALWAYS" />
+
+                    <Button text="Approve selected" onAction="#handleApprove" />
+                    <Button text="Reject selected" styleClass="secondary-button" onAction="#handleReject" />
+                </HBox>
+            </VBox>
+        </center>
+    </BorderPane>
+
+    <VBox fx:id="sidebarPanel" styleClass="sidebar-overlay" visible="false" managed="false"
+          prefWidth="220.0" maxWidth="220.0"
+          StackPane.alignment="CENTER_LEFT">
+        <Button text="Bookings" styleClass="sidebar-button-active" maxWidth="Infinity" onAction="#handleGoToBookings" />
+        <Button text="Resources" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleGoToResources" />
+        <Button text="Utilization" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleGoToUtilization" />
+
+        <Region VBox.vgrow="ALWAYS" />
+
+        <Button text="Logout" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleLogout" />
+    </VBox>
+
+    <Button fx:id="avatarButton" styleClass="avatar-button" onAction="#handleToggleSidebar"
+            StackPane.alignment="BOTTOM_LEFT">
+        <StackPane.margin>
+            <Insets bottom="16.0" left="16.0" />
+        </StackPane.margin>
+    </Button>
+
+</StackPane>
