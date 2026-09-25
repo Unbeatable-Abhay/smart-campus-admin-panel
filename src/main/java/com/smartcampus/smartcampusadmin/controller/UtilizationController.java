@@ -14,6 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 public class UtilizationController {
@@ -23,6 +24,15 @@ public class UtilizationController {
 
     @FXML
     private ListView<String> clustersListView;
+
+    @FXML
+    private Label totalBookingsValue;
+
+    @FXML
+    private Label topResourceValue;
+
+    @FXML
+    private Label peakHourValue;
 
     @FXML
     public void initialize() {
@@ -38,6 +48,8 @@ public class UtilizationController {
                 if (response.getStatusCode() == 200) {
                     JsonObject json = JsonParser.parseString(response.getBody()).getAsJsonObject();
                     JsonArray mostBooked = json.getAsJsonArray("most_booked_resources");
+                    JsonArray peakHours = json.getAsJsonArray("peak_hours");
+                    int totalBookings = json.get("total_bookings").getAsInt();
 
                     XYChart.Series<String, Number> series = new XYChart.Series<>();
                     series.setName("Bookings");
@@ -49,13 +61,30 @@ public class UtilizationController {
                         series.getData().add(new XYChart.Data<>(resourceId, count));
                     }
 
+                    String topResourceText = "-";
+                    if (mostBooked.size() > 0) {
+                        topResourceText = "Resource #" + mostBooked.get(0).getAsJsonObject().get("resource_id").getAsString();
+                    }
+
+                    String peakHourText = "-";
+                    if (peakHours.size() > 0) {
+                        peakHourText = peakHours.get(0).getAsJsonObject().get("hour").getAsString() + ":00";
+                    }
+
+                    final String finalTopResourceText = topResourceText;
+                    final String finalPeakHourText = peakHourText;
+
                     Platform.runLater(() -> {
                         resourceChart.getData().clear();
                         resourceChart.getData().add(series);
+
+                        totalBookingsValue.setText(String.valueOf(totalBookings));
+                        topResourceValue.setText(finalTopResourceText);
+                        peakHourValue.setText(finalPeakHourText);
                     });
                 }
             } catch (Exception e) {
-                // Chart just stays empty on failure; not critical enough to block the screen
+                e.printStackTrace();
             }
         });
 
@@ -85,7 +114,7 @@ public class UtilizationController {
                     Platform.runLater(() -> clustersListView.setItems(FXCollections.observableArrayList(displayLines)));
                 }
             } catch (Exception e) {
-                // ListView just stays empty on failure
+                e.printStackTrace();
             }
         });
 
@@ -104,6 +133,11 @@ public class UtilizationController {
     }
 
     @FXML
+    private void handleGoToUtilization() {
+        // Already on this screen — button exists for sidebar consistency, no action needed
+    }
+
+    @FXML
     private void handleLogout() {
         SessionManager.clear();
         switchScene("login.fxml");
@@ -113,7 +147,7 @@ public class UtilizationController {
         try {
             MainApp.switchScene(fxmlFile);
         } catch (Exception e) {
-            // Scene switch failure would need a full app restart to recover from; acceptable for now
+            e.printStackTrace();
         }
     }
 }

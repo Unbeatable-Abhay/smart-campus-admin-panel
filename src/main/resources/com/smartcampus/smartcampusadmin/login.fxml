@@ -5,26 +5,39 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="12.0" xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.smartcampus.smartcampusadmin.controller.LoginController">
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.smartcampus.smartcampusadmin.controller.LoginController"
+           styleClass="login-background">
 
-    <padding>
-        <Insets top="40.0" right="40.0" bottom="40.0" left="40.0" />
-    </padding>
+    <VBox alignment="CENTER" spacing="10.0">
 
-    <Label text="Smart Campus Admin" style="-fx-font-size: 22px; -fx-font-weight: bold;" />
+        <Label text="Smart Campus Admin" styleClass="heading-label" />
 
-    <Label text="Email" />
-    <TextField fx:id="emailField" maxWidth="250.0" />
+        <VBox alignment="CENTER" spacing="14.0" styleClass="content-panel" maxWidth="320.0">
+            <padding>
+                <Insets top="30.0" right="30.0" bottom="30.0" left="30.0" />
+            </padding>
 
-    <Label text="Password" />
-    <PasswordField fx:id="passwordField" maxWidth="250.0" />
+            <HBox styleClass="input-with-icon" alignment="CENTER_LEFT" maxWidth="260.0">
+                <Label text="&#9993;" styleClass="input-icon" />
+                <TextField fx:id="emailField" promptText="Email" styleClass="icon-text-field" HBox.hgrow="ALWAYS" />
+            </HBox>
 
-    <Button text="Login" onAction="#handleLogin" prefWidth="150.0" />
+            <HBox styleClass="input-with-icon" alignment="CENTER_LEFT" maxWidth="260.0">
+                <Label text="&#128274;" styleClass="input-icon" />
+                <PasswordField fx:id="passwordField" promptText="Password" styleClass="icon-text-field" HBox.hgrow="ALWAYS" />
+            </HBox>
 
-    <Label fx:id="errorLabel" style="-fx-text-fill: #bc002d;" />
+            <Button text="Login" onAction="#handleLogin" prefWidth="260.0" style="-fx-padding: 10px 18px;" />
 
-</VBox>
+            <Label fx:id="errorLabel" styleClass="error-text" />
+        </VBox>
+
+    </VBox>
+
+</StackPane>

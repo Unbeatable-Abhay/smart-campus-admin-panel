@@ -156,6 +156,11 @@ public class BookingsController {
     }
 
     @FXML
+    private void handleGoToBookings() {
+        // Already on this screen — button exists for sidebar consistency, no action needed
+    }
+
+    @FXML
     private void handleLogout() {
         SessionManager.clear();
         stopPollingAndSwitch("login.fxml");

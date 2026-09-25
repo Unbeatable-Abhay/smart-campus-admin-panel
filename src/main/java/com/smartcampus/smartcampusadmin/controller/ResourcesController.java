@@ -216,6 +216,11 @@ public class ResourcesController {
     }
 
     @FXML
+    private void handleGoToResources() {
+        // Already on this screen — button exists for sidebar consistency, no action needed
+    }
+
+    @FXML
     private void handleGoToUtilization() {
         switchScene("utilization.fxml");
     }
@@ -230,7 +235,7 @@ public class ResourcesController {
         try {
             MainApp.switchScene(fxmlFile);
         } catch (Exception e) {
-            // Scene switch failure would need a full app restart to recover from; acceptable for now
+            e.printStackTrace();
         }
     }
 }

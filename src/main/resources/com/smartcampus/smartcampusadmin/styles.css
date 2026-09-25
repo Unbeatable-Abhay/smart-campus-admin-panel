@@ -1,6 +1,16 @@
 .root {
-    -fx-background-color: #f5efe1;
     -fx-font-family: "Segoe UI";
+}
+
+.login-background {
+    -fx-background-image: url("images/login-background.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}
+
+.dashboard-plain-background {
+    -fx-background-color: #f5efe1;
 }
 
 .label {
@@ -9,7 +19,16 @@
 
 .heading-label {
     -fx-font-family: "Georgia";
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 6, 0, 0, 1);
+}
+
+.dashboard-heading {
+    -fx-font-family: "Georgia";
     -fx-font-size: 20px;
+    -fx-font-weight: bold;
     -fx-text-fill: #1a1a1a;
 }
 
@@ -27,7 +46,7 @@
 
 .sidebar-button {
     -fx-background-color: transparent;
-    -fx-text-fill: #c9d4de;
+    -fx-text-fill: #dbe4ec;
     -fx-font-weight: normal;
     -fx-background-radius: 0px;
     -fx-alignment: CENTER_LEFT;
@@ -37,7 +56,7 @@
 }
 
 .sidebar-button:hover {
-    -fx-background-color: #2c4a68;
+    -fx-background-color: rgba(255,255,255,0.1);
     -fx-text-fill: #ffffff;
 }
 
@@ -47,25 +66,31 @@
     -fx-font-weight: bold;
 }
 
-.top-accent-bar {
-    -fx-background-color: #8b2635;
-    -fx-pref-height: 4px;
+.content-panel {
+    -fx-background-color: rgba(255, 255, 255, 0.30);
+    -fx-border-color: rgba(255, 255, 255, 0.6);
+    -fx-border-width: 1px;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 20, 0, 0, 6);
 }
 
-.content-panel {
-    -fx-background-color: #ffffff;
+.dashboard-panel {
+    -fx-background-color: #fffdf7;
     -fx-border-color: #c9a66b;
     -fx-border-width: 1px;
-    -fx-background-radius: 0px;
-    -fx-border-radius: 0px;
-    -fx-padding: 20px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-padding: 16px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 10, 0, 0, 3);
 }
 
 .button {
     -fx-background-color: #8b2635;
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-background-radius: 3px;
+    -fx-background-radius: 5px;
     -fx-padding: 8px 18px;
     -fx-cursor: hand;
 }
@@ -78,9 +103,10 @@
     -fx-background-color: transparent;
     -fx-border-color: #8b2635;
     -fx-border-width: 1px;
+    -fx-border-radius: 5px;
     -fx-text-fill: #8b2635;
     -fx-font-weight: bold;
-    -fx-background-radius: 3px;
+    -fx-background-radius: 5px;
     -fx-padding: 8px 18px;
     -fx-cursor: hand;
 }
@@ -93,19 +119,20 @@
     -fx-background-color: white;
     -fx-border-color: #c9a66b;
     -fx-border-width: 1px;
-    -fx-border-radius: 2px;
-    -fx-background-radius: 2px;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
     -fx-padding: 6px;
 }
 
 .table-view {
     -fx-background-color: white;
-    -fx-border-color: #c9a66b;
+    -fx-border-color: #e8ddc9;
     -fx-border-width: 1px;
+    -fx-background-radius: 6px;
 }
 
 .table-view .column-header-background {
-    -fx-background-color: #f5efe1;
+    -fx-background-color: #f0e9dc;
 }
 
 .table-view .column-header .label {
@@ -117,6 +144,7 @@
 .table-row-cell {
     -fx-background-color: white;
     -fx-border-color: transparent transparent #f0e9dc transparent;
+    -fx-cell-size: 40px;
 }
 
 .table-row-cell:selected {
@@ -129,8 +157,9 @@
 
 .list-view {
     -fx-background-color: white;
-    -fx-border-color: #c9a66b;
+    -fx-border-color: #e8ddc9;
     -fx-border-width: 1px;
+    -fx-background-radius: 6px;
 }
 
 .list-cell {
@@ -144,6 +173,10 @@
 }
 
 .chart {
+    -fx-background-color: transparent;
+}
+
+.chart-plot-background {
     -fx-background-color: white;
 }
 
@@ -158,14 +191,17 @@
 }
 
 .axis {
-    -fx-tick-label-fill: #6b6259;
+    -fx-tick-label-fill: #4a4038;
 }
 
 .stat-card {
-    -fx-background-color: white;
+    -fx-background-color: #fffdf7;
     -fx-border-color: #c9a66b;
     -fx-border-width: 1px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
     -fx-padding: 16px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2);
 }
 
 .stat-value {
@@ -182,4 +218,25 @@
 
 .error-text {
     -fx-text-fill: #8b2635;
+}
+
+.input-with-icon {
+    -fx-background-color: rgba(255,255,255,0.9);
+    -fx-border-color: #c9a66b;
+    -fx-border-width: 1px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-padding: 4px 10px 4px 14px;
+}
+
+.input-icon {
+    -fx-font-size: 14px;
+    -fx-text-fill: #8b2635;
+    -fx-padding: 0px 8px 0px 0px;
+}
+
+.icon-text-field {
+    -fx-background-color: transparent;
+    -fx-border-width: 0px;
+    -fx-padding: 8px 0px 8px 0px;
 }
